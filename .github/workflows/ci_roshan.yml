@@ -18,11 +18,17 @@ jobs:
         with:
           node-version: "16"
 
+      - name: Change directory to devops_react_demo
+        run: cd devops_react_demo
+
       - name: Install dependencies
         run: npm install
+        working-directory: devops_react_demo
 
       - name: Run tests
         run: npm test
+        working-directory: devops_react_demo
 
       - name: Build project
         run: npm run build
+        working-directory: devops_react_demo
