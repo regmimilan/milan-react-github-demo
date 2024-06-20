@@ -18,7 +18,7 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-        working-directory: /home/runner/work/milan-react-github-demo/milan-react-github-demo
+        working-directory: ./devops_react_demo
 
   run_tests:
     runs-on: ubuntu-latest
@@ -34,11 +34,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: milan-react-github-demo
+        working-directory: ./devops_react_demo
 
       - name: Run tests
         run: npm test
-        working-directory: milan-react-github-demo
+        working-directory: ./devops_react_demo
 
   build_project:
     runs-on: ubuntu-latest
@@ -53,8 +53,8 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-        working-directory: milan-react-github-demo
+        working-directory: ./devops_react_demo
 
       - name: Build the project
         run: npm run build
-        working-directory: milan-react-github-demo
+        working-directory: ./devops_react_demo
