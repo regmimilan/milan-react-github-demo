@@ -10,19 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # This action checks out your repository so that subsequent steps can access it
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Print current working directory
-        run: |
-          pwd
-          ls -la
+
       - name: Install dependencies
         run: npm install
-        working-directory: ./milan-react-github-demo
 
   run_tests:
     runs-on: ubuntu-latest
@@ -36,13 +32,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./milan-react-github-demo
-
       - name: Run tests
         run: npm test
-        working-directory: ./milan-react-github-demo
 
   build_project:
     runs-on: ubuntu-latest
@@ -55,10 +46,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./milan-react-github-demo
 
       - name: Build the project
         run: npm run build
-        working-directory: ./milan-react-github-demo
