@@ -19,7 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./milan-react-github-demo
 
   run_tests:
     runs-on: ubuntu-latest
@@ -33,13 +32,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies (cache)
-        run: npm ci
-        working-directory: ./milan-react-github-demo
-
       - name: Run tests
         run: npm test
-        working-directory: ./milan-react-github-demo
 
   build_project:
     runs-on: ubuntu-latest
@@ -53,10 +47,5 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies (cache)
-        run: npm ci
-        working-directory: ./milan-react-github-demo
-
       - name: Build the project
         run: npm run build
-        working-directory: ./milan-react-github-demo
