@@ -1,4 +1,4 @@
-name: CI Workflow
+name: CI
 
 on:
   push:
@@ -10,25 +10,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: "16"
-
-      - name: Change directory to devops_react_demo
-        run: cd devops_react_demo
+          node-version: '14'
 
       - name: Install dependencies
         run: npm install
-        working-directory: devops_react_demo
-
-      - name: Run tests
-        run: npm run test
-        working-directory: devops_react_demo
 
       - name: Build project
         run: npm run build
-        working-directory: devops_react_demo
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to production
+        run: npm run deploy
