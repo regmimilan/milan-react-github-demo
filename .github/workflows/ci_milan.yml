@@ -18,7 +18,7 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-        working-directory: milan-react-github-demo
+        working-directory: /home/runner/work/milan-react-github-demo/milan-react-github-demo
 
   run_tests:
     runs-on: ubuntu-latest
