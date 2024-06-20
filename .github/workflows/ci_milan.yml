@@ -6,40 +6,6 @@ on:
       - main
 
 jobs:
-  install_dependencies:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./devops_react_demo
-
-  run_tests:
-    runs-on: ubuntu-latest
-    needs: install_dependencies
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./devops_react_demo
-
-      - name: Run tests
-        run: npm test
-        working-directory: ./devops_react_demo
-
   build_project:
     runs-on: ubuntu-latest
     needs: run_tests
