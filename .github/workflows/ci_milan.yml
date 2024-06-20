@@ -52,7 +52,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-
+      - name: Print current working directory
+        run: |
+          pwd
+          ls -la
       - name: Install dependencies
         run: npm install
         working-directory: ./milan-react-github-demo
