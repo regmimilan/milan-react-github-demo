@@ -1,4 +1,4 @@
-name: CI
+name: CI Workflow
 
 on:
   push:
@@ -6,58 +6,57 @@ on:
       - main
 
 jobs:
-  build:
+  install_dependencies:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Check out the repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./milan-react-github-demo
 
-      - name: Build project
-        run: npm run build
-
-  test:
+  run_tests:
     runs-on: ubuntu-latest
-    needs: build
-
+    needs: install_dependencies
     steps:
-      - name: Checkout code
+      - name: Check out the repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies (cache)
+        run: npm ci
+        working-directory: ./milan-react-github-demo
 
       - name: Run tests
         run: npm test
+        working-directory: ./milan-react-github-demo
 
-  deploy:
+  build_project:
     runs-on: ubuntu-latest
-    needs: test
-
+    needs: run_tests
     steps:
-      - name: Checkout code
+      - name: Check out the repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies (cache)
+        run: npm ci
+        working-directory: ./milan-react-github-demo
 
-      - name: Deploy to production
-        run: npm run deploy
+      - name: Build the project
+        run: npm run build
+        working-directory: ./milan-react-github-demo
